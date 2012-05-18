@@ -8,10 +8,14 @@ disp(project)
 %% From Epoch => Source("genus") => EpochGroups
 epoch = ctx.objectWithURI('ovation:///46bbf89b-5595-419a-9ba0-ae23bcc2038a/#5-1003-1-15:1000044');
 disp(epoch)
-epoch.getResponse('body length').getFloatingPointData
+disp([...
+    'body length = '...
+    num2str(epoch.getResponse('body length').getFloatingPointData)]);
 
 genus = epoch.getEpochGroup().getSource().getParentRoot();
-genus.getOwnerProperty('genus-name')
+disp([...
+    'Genus name: '...
+    genus.getOwnerProperty('genus-name')]);
 
 allAstatoreochromisEpochGroups = genus.getAllEpochGroups();
 disp(allAstatoreochromisEpochGroups)
@@ -23,7 +27,9 @@ iterator = ctx.query(editQuery());
 body_length = [];
 brain_mass = [];
 while(iterator.hasNext())
+    
     eg = iterator.next();
+    
     eItr = eg.getEpochsIterable().iterator();
     while(eItr.hasNext())
         epoch = eItr.next();
